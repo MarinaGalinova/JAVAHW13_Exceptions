@@ -10,15 +10,16 @@ public class TestRepository {
     @Test
     public void createRepository() {
         Repository repo = new Repository();
-            repo.saveProduct(product1);
-            repo.saveProduct(product2);
-            repo.saveProduct(product3);
+        repo.saveProduct(product1);
+        repo.saveProduct(product2);
+        repo.saveProduct(product3);
 
-            Product[] expected = {product1, product2, product3};
-            Product[] actual = repo.getProducts();
+        Product[] expected = {product1, product2, product3};
+        Product[] actual = repo.getProducts();
 
         Assertions.assertArrayEquals(expected, actual);
-        }
+    }
+
     @Test
     public void delByID() {
         Repository repo = new Repository();
@@ -49,7 +50,7 @@ public class TestRepository {
     }
 
     @Test
-    public void searchByHoleText() {
+    public void searchByTextOneword2Result() {
         Repository repo = new Repository();
         ProductManager manager = new ProductManager(repo);
         manager.add(product1);
@@ -62,6 +63,36 @@ public class TestRepository {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void searchByTextOneword0Result() {
+        Repository repo = new Repository();
+        ProductManager manager = new ProductManager(repo);
+        manager.add(product1);
+        manager.add(product2);
+        manager.add(product3);
+        String text = "Оляпка";
+
+        Product[] expected = {};
+        Product[] actual = manager.searchBy(text);
+
+        Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void searchByHoleText() {
+        Repository repo = new Repository();
+        ProductManager manager = new ProductManager(repo);
+        manager.add(product1);
+        manager.add(product2);
+        manager.add(product3);
+        String text = "Повелитель мух";
+
+        Product[] expected = {product1};
+        Product[] actual = manager.searchBy(text);
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+}
 
 

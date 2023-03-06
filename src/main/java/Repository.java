@@ -1,7 +1,4 @@
 public class Repository {
-    //позволяющий сохранять Product, получать все сохранённые Product и удалять по ID.
-    // Для этого репозиторий будет хранить у себя поле с типом Product[] (массив товаров).
-
     public Product[] products = new Product[0];
 
     public void saveProduct(Product product) {

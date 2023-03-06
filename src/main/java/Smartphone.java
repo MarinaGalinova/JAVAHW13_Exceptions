@@ -7,15 +7,6 @@ public class Smartphone extends Product {
         this.brand = brand;
     }
 
-
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-
     public String getBrand() {
         return brand;
     }
