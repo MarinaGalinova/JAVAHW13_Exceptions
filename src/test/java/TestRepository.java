@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 
 public class TestRepository {
 
@@ -92,6 +93,49 @@ public class TestRepository {
         Product[] actual = manager.searchBy(text);
 
         Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void searchById() {
+
+        Repository repo = new Repository();
+        ProductManager manager = new ProductManager(repo);
+        manager.add(product1);
+        manager.add(product2);
+        manager.add(product3);
+
+        Product expected = product1;
+        Product actual = repo.findById(1);
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void deleteById() {
+
+        Repository repo = new Repository();
+        ProductManager manager = new ProductManager(repo);
+        manager.add(product1);
+        manager.add(product2);
+        manager.add(product3);
+
+        Product[] expected = {product2, product3};
+        Product[] actual = repo.deleteProductByID(1);
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void searchByDoesentExistingId() {
+
+        Repository repo = new Repository();
+        ProductManager manager = new ProductManager(repo);
+        manager.add(product1);
+        manager.add(product2);
+        manager.add(product3);
+
+        Assertions.assertThrows(NotFoundException.class, () ->
+                repo.deleteProductByID(4));
     }
 }
 

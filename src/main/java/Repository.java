@@ -15,7 +15,21 @@ public class Repository {
         return products;
     }
 
-    public void deleteProductByID(int id) {
+    public Product findById(int id) {
+        for (Product product : getProducts()) {
+            if (product.id == id) {
+                return product;
+            }
+        }
+        return null;
+    }
+
+    public Product[] deleteProductByID(int id) {
+
+        if (findById(id) == null) {
+            throw new NotFoundException("Нет элемента с таким id:" + id);
+        }
+
         Product[] tmp = new Product[products.length - 1];
 
         int copyToIndex = 0;
@@ -27,8 +41,7 @@ public class Repository {
             }
         }
         products = tmp;
-
-
+        return tmp;
     }
 
 
